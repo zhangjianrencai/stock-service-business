@@ -41,6 +41,11 @@ public class IPOServiceImpl implements IPOService{
 		ipoRepository.deleteById(id);
 	}
 
+	@Override
+	public Object searchIPOByUser(long id) {
+		return ipoRepository.searchIPOByUser(id);
+	}
+
   
 }
 

@@ -17,4 +17,6 @@ public interface IPOService {
     public List<IPO> findAllIPOList();
     
     public void delete(long id);
+    
+    public Object searchIPOByUser(long id);
 }

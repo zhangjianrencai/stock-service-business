@@ -42,9 +42,15 @@ public class IPOController {
 		return ResponseEntity.ok("Delete IPO successfully.");
 	}
 	
-	@PutMapping
+	@PutMapping("/{id}")
 	public ResponseEntity<String> update(@RequestBody IPO ipo){
 		ipoService.save(ipo);
 		return ResponseEntity.ok("Update is OK"); 
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Object> searchIPOByUser(@PathVariable long id){
+		ResponseEntity<Object> searchIPOByUser = (ResponseEntity<Object>) ipoService.searchIPOByUser(id);
+		return searchIPOByUser;
 	}
 }				
