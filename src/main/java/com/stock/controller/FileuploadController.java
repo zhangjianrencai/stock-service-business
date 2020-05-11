@@ -2,12 +2,22 @@ package com.stock.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.stock.service.ImportService;
 
 @RestController
 public class FileuploadController {
@@ -15,30 +25,29 @@ public class FileuploadController {
     /**
      * 实现文件上传
      * */
-    @RequestMapping("/api/fileUpload")
-    @ResponseBody 
-    public String fileUpload(@RequestParam("fileName") MultipartFile file){
-        if(file.isEmpty()){
-            return "false";
+    @Autowired
+    private ImportService importService;
+
+
+    @PostMapping(value = "/api/upload")
+    @ResponseBody
+    public String uploadExcel(HttpServletRequest request) throws Exception {
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+
+        MultipartFile file = multipartRequest.getFile("file_data");
+        if (file.isEmpty()) {
+            return "文件不能为空";
         }
-        String fileName = file.getOriginalFilename();
-        int size = (int) file.getSize();
-        System.out.println(fileName + "-->" + size);
-        
-        String path = "F:/test" ;
-        File dest = new File(path + "/" + fileName);
-        if(!dest.getParentFile().exists()){ //判断文件父目录是否存在
-            dest.getParentFile().mkdir();
+        InputStream inputStream = file.getInputStream();
+        List<List<Object>> list = importService.getBankListByExcel(inputStream, file.getOriginalFilename());
+        inputStream.close();
+
+        for (int i = 0; i < list.size(); i++) {
+            List<Object> lo = list.get(i);
+            //TODO 随意发挥
+            System.out.println(lo);
+
         }
-        try {
-            file.transferTo(dest); //保存文件
-            return "true";
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-            return "false";
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "false";
-        }
+        return "上传成功";
     }
 }				

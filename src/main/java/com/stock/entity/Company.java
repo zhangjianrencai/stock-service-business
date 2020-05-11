@@ -33,15 +33,35 @@ public class Company implements Serializable {
 	@Column(nullable = false)
 	private String stockCode;
 	@Column(nullable = false)
-	private String sectorId;
-	@Column(nullable = false)
 	private String brief;
 	
 	@ManyToMany
 	@JoinTable(name = "company_sector", 
-			joinColumns = @JoinColumn(name = "sector_id"),
-			inverseJoinColumns = @JoinColumn(name = "id"))
+			joinColumns = @JoinColumn(name = "company_id"),
+			inverseJoinColumns = @JoinColumn(name = "sector_id"))
 	private List<Sector> sector;
+	
+	@ManyToMany
+	@JoinTable(name = "company_exchange", 
+			joinColumns = @JoinColumn(name = "company_id"),
+			inverseJoinColumns = @JoinColumn(name = "exchange_id"))
+	private List<Exchange> exchange;
+
+	public List<Exchange> getExchange() {
+		return exchange;
+	}
+
+	public void setExchange(List<Exchange> exchange) {
+		this.exchange = exchange;
+	}
+
+	public List<Sector> getSector() {
+		return sector;
+	}
+
+	public void setSector(List<Sector> sector) {
+		this.sector = sector;
+	}
 
 	public long getId() {
 		return id;
@@ -89,14 +109,6 @@ public class Company implements Serializable {
 
 	public void setStockCode(String stockCode) {
 		this.stockCode = stockCode;
-	}
-
-	public String getSectorId() {
-		return sectorId;
-	}
-
-	public void setSectorId(String sectorId) {
-		this.sectorId = sectorId;
 	}
 
 	public String getBrief() {
