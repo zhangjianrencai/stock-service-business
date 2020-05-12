@@ -56,22 +56,21 @@ public class FileuploadController {
         List<List<Object>> list = importService.getBankListByExcel(inputStream, file.getOriginalFilename());
         inputStream.close();
 
-        StockPrice stockPrice = new StockPrice();
-		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
+        
+		DateFormat sdf = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
 		DateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         for (int i = 0; i < list.size(); i++) {
             List<Object> lo = list.get(i);
-            if (lo.size() != 5) {
+            if (String.valueOf(lo.get(0)).length() > 7) {
             	break;
             } else {
-            	stockPrice.setStockCode(String.valueOf(lo.get(0)));
-            	stockPrice.setStockExchange(String.valueOf(lo.get(1)));
-            	stockPrice.setCurrentPrice(String.valueOf(lo.get(2)));
-            	//new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(String.valueOf(lo.get(3)) + String.valueOf(lo.get(4)))
-            	stockPrice.setDateTime(Timestamp.valueOf(sdf2.format(sdf.parse(String.valueOf(lo.get(3)) + String.valueOf(lo.get(4))))));
+            	StockPrice stockPrice = new StockPrice();
+            	stockPrice.setStockCode(String.valueOf(lo.get(0)).trim());
+            	stockPrice.setStockExchange(String.valueOf(lo.get(1)).trim());
+            	stockPrice.setCurrentPrice(String.valueOf(lo.get(2)).trim());
+            	stockPrice.setDateTime(Timestamp.valueOf(sdf2.format(sdf.parse(String.valueOf(lo.get(3)).trim() + String.valueOf(lo.get(4)).trim()))));
             	stockPriceService.save(stockPrice);
             }
-            System.out.println(lo);
 
         }
         return "updateload success";

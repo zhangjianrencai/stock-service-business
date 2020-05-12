@@ -1,6 +1,7 @@
 package com.stock.service.impl;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +11,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +32,7 @@ public class ImportServiceImpl implements ImportService{
      */
 	@Override
     public List getBankListByExcel(InputStream in, String fileName) throws Exception {
-        List list = new ArrayList<>();
+        List<Object> list = new ArrayList<>();
         //创建Excel工作薄
         Workbook work = this.getWorkbook(in, fileName);
         if (null == work) {
@@ -37,7 +40,6 @@ public class ImportServiceImpl implements ImportService{
         }
         Sheet sheet = null;
         Row row = null;
-        Cell cell = null;
 
         for (int i = 0; i < work.getNumberOfSheets(); i++) {
             sheet = work.getSheetAt(i);
@@ -53,14 +55,54 @@ public class ImportServiceImpl implements ImportService{
 
                 List<Object> li = new ArrayList<>();
                 for (int y = row.getFirstCellNum(); y < row.getLastCellNum(); y++) {
-                    cell = row.getCell(y);
-                    li.add(cell);
+                	XSSFCell cell = (XSSFCell) row.getCell(y);
+                    li.add(this.getStringCellValue(cell));
                 }
                 list.add(li);
             }
         }
         work.close();
         return list;
+    }
+	
+    /**
+     * 获取单元格数据内容为字符串类型的数据
+     *
+     * @param cell Excel单元格
+     * @return String 单元格数据内容
+     */
+    private String getStringCellValue(XSSFCell cell) {
+        String strCell = "";
+        switch (cell.getCellType()) {
+            case XSSFCell.CELL_TYPE_STRING:
+                strCell = cell.getStringCellValue();
+                break;
+            case XSSFCell.CELL_TYPE_NUMERIC:
+                if (DateUtil.isCellDateFormatted(cell)) {
+                    //  如果是date类型则 ，获取该cell的date值
+                    strCell = new SimpleDateFormat("yyyy-MM-dd").format(DateUtil.getJavaDate(cell.getNumericCellValue()));
+                } else { // 纯数字
+                    cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+                    strCell = String.valueOf(cell.getStringCellValue());
+                }
+                break;
+            case XSSFCell.CELL_TYPE_BOOLEAN:
+                strCell = String.valueOf(cell.getBooleanCellValue());
+                break;
+            case XSSFCell.CELL_TYPE_BLANK:
+                strCell = "";
+                break;
+            default:
+                strCell = "";
+                break;
+        }
+        if (strCell.equals("") || strCell == null) {
+            return "";
+        }
+        if (cell == null) {
+            return "";
+        }
+        return strCell;
     }
 
     /**
