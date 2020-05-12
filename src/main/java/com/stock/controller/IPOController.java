@@ -32,30 +32,30 @@ public class IPOController {
     IPOService ipoService;
 
 	@GetMapping
-	public List<IPO> findAllIPOList(){
+	public List<IPO> findAllIPOList() throws Exception{
 		return ipoService.findAllIPOList();
 	}
 	
 	@PostMapping
-	public ResponseEntity<String> save(@RequestBody IPO ipo){
+	public ResponseEntity<String> save(@RequestBody IPO ipo) throws Exception{
 		ipoService.save(ipo);
 		return ResponseEntity.ok("Save is OK"); 
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> delete(@PathVariable Long id) {
+	public ResponseEntity<String> delete(@PathVariable Long id) throws Exception{
 		ipoService.delete(id);
 		return ResponseEntity.ok("Delete IPO successfully.");
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<String> update(@RequestBody IPO ipo){
+	public ResponseEntity<String> update(@RequestBody IPO ipo) throws Exception{
 		ipoService.save(ipo);
 		return ResponseEntity.ok("Update is OK"); 
 	}
 	
 	@GetMapping("/{id}")
-	public Object searchIPOByUser(@PathVariable long id){
+	public Object searchIPOByUser(@PathVariable long id) throws Exception{
 		return ipoService.searchIPOByUser(id);
 	}
 }				

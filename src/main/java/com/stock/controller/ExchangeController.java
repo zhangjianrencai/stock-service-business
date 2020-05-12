@@ -30,24 +30,24 @@ public class ExchangeController {
     ExchangeService exchangeService;
 	
 	@GetMapping
-	public List<Exchange> findAllExchangeList(){
+	public List<Exchange> findAllExchangeList() throws Exception{
 		return exchangeService.findAllExchangeList();
 	}
 	
 	@PostMapping
-	public ResponseEntity<String> save(@RequestBody Exchange exchange){
+	public ResponseEntity<String> save(@RequestBody Exchange exchange) throws Exception{
 		exchangeService.save(exchange);
 		return ResponseEntity.ok("Save is OK"); 
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> delete(@PathVariable Long id) {
+	public ResponseEntity<String> delete(@PathVariable Long id) throws Exception{
 		exchangeService.delete(id);
 		return ResponseEntity.ok("Delete Exchange successfully.");
 	}
 	
 	@PutMapping
-	public ResponseEntity<String> update(@RequestBody Exchange exchange){
+	public ResponseEntity<String> update(@RequestBody Exchange exchange) throws Exception{
 		exchangeService.save(exchange);
 		return ResponseEntity.ok("Update is OK"); 
 	}

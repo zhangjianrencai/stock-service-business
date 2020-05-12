@@ -46,29 +46,41 @@ public class SectorServiceTest {
 	@Test
     @Transactional
     @Rollback
-	public void testFindById(long sectorId) {
-		
+	public void testFindById() {
+		Sector sector = this.generateSector();
+		Sector savedSector = sectorService.save(sector);
+		Assert.assertEquals(savedSector.getSectorName(), "sectorName");
+		Assert.assertEquals(savedSector.getBrief(), "brief");
 	}
 
 	@Test
     @Transactional
     @Rollback
-    public void testEdit(Sector sector) {
-		
+    public void testEdit() {
+		Sector sector1 = this.generateSector();
+		Sector savedSector = sectorService.save(sector1);
+		Assert.assertEquals(savedSector.getSectorName(), "sectorName");
+		Assert.assertEquals(savedSector.getBrief(), "brief");
 	}
     
 	@Test
     @Transactional
     @Rollback
     public void findALL() {
-		List<Sector> sectorList = new ArrayList();
+		Sector sector = this.generateSector();
+		Sector savedSector = sectorService.save(sector);
+		Assert.assertEquals(savedSector.getSectorName(), "sectorName");
+		Assert.assertEquals(savedSector.getBrief(), "brief");
 		
 	}
     
 	@Test
     @Transactional
     @Rollback
-    public void testDelete(Long id) {
-		
+    public void testDelete() {
+		Sector sector = this.generateSector();
+		Sector savedSector = sectorService.save(sector);
+		Assert.assertEquals(savedSector.getSectorName(), "sectorName");
+		Assert.assertEquals(savedSector.getBrief(), "brief");
 	}
 }

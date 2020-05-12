@@ -32,24 +32,24 @@ public class SectorController {
     SectorService sectorService;
     
 	@GetMapping
-	public List<Sector> findAllSectorList(){
+	public List<Sector> findAllSectorList() throws Exception{
 		return sectorService.findALL();
 	}
 	
 	@PostMapping
-	public ResponseEntity<String> save(@RequestBody Sector sector){
+	public ResponseEntity<String> save(@RequestBody Sector sector) throws Exception{
 		sectorService.save(sector);
 		return ResponseEntity.ok("Save is OK"); 
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> delete(@PathVariable Long id) {
+	public ResponseEntity<String> delete(@PathVariable Long id) throws Exception{
 		sectorService.delete(id);
 		return ResponseEntity.ok("Delete sector successfully.");
 	}
 	
 	@PutMapping
-	public ResponseEntity<String> update(@RequestBody Sector sector){
+	public ResponseEntity<String> update(@RequestBody Sector sector) throws Exception{
 		sectorService.save(sector);
 		return ResponseEntity.ok("Update is OK"); 
 	}

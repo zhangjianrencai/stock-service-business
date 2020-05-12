@@ -35,7 +35,7 @@ public class CompanyController {
      * @return List<Company>
      */
 	@GetMapping
-	public List<Company> findAllCompanyList(){
+	public List<Company> findAllCompanyList() throws Exception{
 		return companyService.findAllCompanyList();
 	}
 	
@@ -45,7 +45,7 @@ public class CompanyController {
      * @return String 
      */
 	@PostMapping
-	public ResponseEntity<String> save(@RequestBody Company company){
+	public ResponseEntity<String> save(@RequestBody Company company) throws Exception{
 		companyService.save(company);
 		return ResponseEntity.ok("Save is OK"); 
 	}
@@ -56,7 +56,7 @@ public class CompanyController {
      * @return String
      */
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> delete(@PathVariable Long id) {
+	public ResponseEntity<String> delete(@PathVariable Long id) throws Exception{
 		companyService.delete(id);
 		return ResponseEntity.ok("Delete company successfully.");
 	}
@@ -67,7 +67,7 @@ public class CompanyController {
      * @return String
      */
 	@PutMapping
-	public ResponseEntity<String> update(@RequestBody Company company){
+	public ResponseEntity<String> update(@RequestBody Company company) throws Exception{
 		companyService.save(company);
 		return ResponseEntity.ok("Update is OK"); 
 	}
