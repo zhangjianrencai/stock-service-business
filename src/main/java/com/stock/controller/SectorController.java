@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.stock.entity.Sector;
 import com.stock.service.SectorService;
 
+
+/**
+ * Sector相关的CRUD功能
+ * 
+ * @author JianZhang
+ */
 @RestController
 @RequestMapping("/api/sector")
 //@CrossOrigin(origins="http://localhost:4200")

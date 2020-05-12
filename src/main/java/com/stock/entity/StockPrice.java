@@ -17,6 +17,8 @@ public class StockPrice implements Serializable {
 	@GeneratedValue(strategy=GenerationType.TABLE)
 	private long id;
 	@Column(nullable = false)
+	private String stockCode;
+	@Column(nullable = false)
 	private String stockExchange;
 	@Column(nullable = false)
 	private String currentPrice;
@@ -37,6 +39,14 @@ public class StockPrice implements Serializable {
 
 	public void setStockExchange(String stockExchange) {
 		this.stockExchange = stockExchange;
+	}
+	
+	public String getStockCode() {
+		return stockCode;
+	}
+
+	public void setStockCode(String stockCode) {
+		this.stockCode = stockCode;
 	}
 
 	public String getCurrentPrice() {

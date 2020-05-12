@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.stock.entity.Exchange;
 import com.stock.service.ExchangeService;
 
+
+/**
+ * StockExchange相关的CRUD功能
+ * 
+ * @author JianZhang
+ */
 @RestController
 @RequestMapping("/api/exchange")
 public class ExchangeController {

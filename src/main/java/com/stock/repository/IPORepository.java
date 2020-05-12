@@ -9,8 +9,8 @@ import com.stock.entity.IPO;
 
 @Repository
 public interface IPORepository extends JpaRepository<IPO, Long> {
-	
-	@Query(value = "select c.company_name as companyName, c.ceo as CEO, c.directors as broadMember, c.brief as remarks, s.sector_name as sectorName from company c left join sector s on c.sector_id = s.id where c.id=?;", nativeQuery = true)
+    
+	@Query(value = "select c.company_name as companyName, c.ceo as CEO, c.directors as broadMember, c.brief as remarks, s.sector_name as sectorName from company c left join sector s on c.id = s.id where c.id=?;", nativeQuery = true)
 	public Object searchIPOByUser(@Param("id")Long id);
 
 }

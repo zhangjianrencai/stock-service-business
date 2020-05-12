@@ -16,8 +16,8 @@ public class SectorServiceImpl implements SectorService{
     private SectorRepository sectorRepository;
 
     @Override
-    public void save(Sector sector) {
-    	sectorRepository.save(sector);
+    public Sector save(Sector sector) {
+    	return sectorRepository.save(sector);
     }
 
 	@Override

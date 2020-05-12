@@ -18,6 +18,12 @@ import com.stock.entity.IPO;
 import com.stock.entity.IPO;
 import com.stock.service.IPOService;
 
+
+/**
+ * IPO相关的CRUD功能
+ * 
+ * @author JianZhang
+ */
 @RestController
 @RequestMapping("/api/ipo")
 public class IPOController {
@@ -49,8 +55,7 @@ public class IPOController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Object> searchIPOByUser(@PathVariable long id){
-		ResponseEntity<Object> searchIPOByUser = (ResponseEntity<Object>) ipoService.searchIPOByUser(id);
-		return searchIPOByUser;
+	public Object searchIPOByUser(@PathVariable long id){
+		return ipoService.searchIPOByUser(id);
 	}
 }				
