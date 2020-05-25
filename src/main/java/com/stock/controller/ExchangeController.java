@@ -24,7 +24,7 @@ import com.stock.service.ExchangeService;
  * @author JianZhang
  */
 @RestController
-@RequestMapping("/api/exchange")
+@RequestMapping("/exchange")
 public class ExchangeController {
     @Resource
     ExchangeService exchangeService;
@@ -46,8 +46,9 @@ public class ExchangeController {
 		return ResponseEntity.ok("Delete Exchange successfully.");
 	}
 	
-	@PutMapping
-	public ResponseEntity<String> update(@RequestBody Exchange exchange) throws Exception{
+	@PutMapping("/{id}")
+	public ResponseEntity<String> update(@PathVariable long id, @RequestBody Exchange exchange) throws Exception{
+		exchange.setId(id);
 		exchangeService.save(exchange);
 		return ResponseEntity.ok("Update is OK"); 
 	}

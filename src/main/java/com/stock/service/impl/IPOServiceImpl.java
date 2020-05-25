@@ -28,7 +28,17 @@ public class IPOServiceImpl implements IPOService{
 									
 	@Override
 	public void edit(IPO ipo) {
-		ipoRepository.save(ipo);
+		IPO newipo = ipoRepository.getOne(ipo.getId());
+		newipo.setCompanyId(ipo.getCompanyId());
+		newipo.setCompanyName(ipo.getCompanyName());
+		newipo.setDateTime(ipo.getDateTime());
+		newipo.setExchangeId(ipo.getExchangeId());
+		newipo.setPrice(ipo.getPrice());
+		newipo.setRemarks(ipo.getRemarks());
+		newipo.setShares(ipo.getShares());
+		newipo.setStockExchange(ipo.getStockExchange());
+		ipoRepository.save(newipo);
+		//ipoRepository.update(ipo.getExchangeId(), ipo.getPrice(), ipo.getShares(), ipo.getDataTime(), ipo.getRemarks(), ipo.getCompanyName(), ipo.getStockExchange(),ipo.getCompanyId(), ipo.getId());
 	}
 
 	@Override

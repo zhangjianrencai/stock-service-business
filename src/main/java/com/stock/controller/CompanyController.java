@@ -24,7 +24,7 @@ import com.stock.service.CompanyService;
  * @author JianZhang
  */
 @RestController
-@RequestMapping("/api/company")
+@RequestMapping("/company")
 public class CompanyController {
     @Resource
     CompanyService companyService;
@@ -66,7 +66,7 @@ public class CompanyController {
      * 
      * @return String
      */
-	@PutMapping
+	@PutMapping("/{id}")
 	public ResponseEntity<String> update(@RequestBody Company company) throws Exception{
 		companyService.save(company);
 		return ResponseEntity.ok("Update is OK"); 

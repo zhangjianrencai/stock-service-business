@@ -25,7 +25,7 @@ import com.stock.service.IPOService;
  * @author JianZhang
  */
 @RestController
-@RequestMapping("/api/ipo")
+@RequestMapping("/ipo")
 public class IPOController {
 
     @Resource
@@ -49,8 +49,9 @@ public class IPOController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<String> update(@RequestBody IPO ipo) throws Exception{
-		ipoService.save(ipo);
+	public ResponseEntity<String> update(@PathVariable long id, @RequestBody IPO ipo) throws Exception{
+		ipo.setId(id);
+		ipoService.edit(ipo);
 		return ResponseEntity.ok("Update is OK"); 
 	}
 	

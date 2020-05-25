@@ -24,7 +24,7 @@ import com.stock.service.SectorService;
  * @author JianZhang
  */
 @RestController
-@RequestMapping("/api/sector")
+@RequestMapping("/sector")
 //@CrossOrigin(origins="http://localhost:4200")
 public class SectorController {
 	

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stock.entity.Exchange;
+import com.stock.entity.IPO;
 import com.stock.repository.ExchangeRepository;
 import com.stock.service.ExchangeService;
 
@@ -31,6 +32,11 @@ public class ExchangeServiceImpl implements ExchangeService{
 
 	@Override
 	public void edit(Exchange exchange) {
+		Exchange newExchange = exchangeRepository.getOne(exchange.getId());
+		newExchange.setBrief(exchange.getBrief());
+		newExchange.setContactAddress(exchange.getContactAddress());
+		newExchange.setRemarks(exchange.getRemarks());
+		newExchange.setStockExchange(exchange.getStockExchange());
 		exchangeRepository.save(exchange);
 	}
 

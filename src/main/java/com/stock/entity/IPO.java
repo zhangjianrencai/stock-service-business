@@ -21,28 +21,20 @@ public class IPO implements Serializable {
 	@Column(nullable = false)
 	private String exchangeId;
 	@Column(nullable = false)
+	private String companyName;
+	@Column(nullable = false)
+	private String stockExchange;
+	@Column(nullable = false)
 	private String price;
 	@Column(nullable = false)
 	private String shares;
 	@Column(nullable = true)
 	private String remarks;
 	@Column(nullable = false)
-	private Timestamp dataTime;
+	private Timestamp dateTime;
 
 	public IPO() {
 		super();
-	}
-
-	public IPO(long id, String companyId, String exchangeId, String price, String shares, String remarks,
-			Timestamp dataTime) {
-		super();
-		this.id = id;
-		this.companyId = companyId;
-		this.exchangeId = exchangeId;
-		this.price = price;
-		this.shares = shares;
-		this.remarks = remarks;
-		this.dataTime = dataTime;
 	}
 
 	public long getId() {
@@ -67,6 +59,22 @@ public class IPO implements Serializable {
 
 	public void setExchangeId(String exchangeId) {
 		this.exchangeId = exchangeId;
+	}
+	
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getStockExchange() {
+		return stockExchange;
+	}
+
+	public void setStockExchange(String stockExchange) {
+		this.stockExchange = stockExchange;
 	}
 
 	public String getPrice() {
@@ -93,12 +101,12 @@ public class IPO implements Serializable {
 		this.remarks = remarks;
 	}
 
-	public Timestamp getDataTime() {
-		return dataTime;
+	public Timestamp getDateTime() {
+		return dateTime;
 	}
 
-	public void setDataTime(Timestamp dataTime) {
-		this.dataTime = dataTime;
+	public void setDateTime(Timestamp dateTime) {
+		this.dateTime = dateTime;
 	}
 }
 	

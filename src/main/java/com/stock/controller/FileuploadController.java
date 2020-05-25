@@ -43,7 +43,7 @@ public class FileuploadController {
      * 
      * @return String
      */
-    @PostMapping(value = "/api/upload")
+    @PostMapping(value = "/upload")
     @ResponseBody
     public String uploadExcel(HttpServletRequest request) throws Exception {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
