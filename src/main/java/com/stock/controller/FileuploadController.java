@@ -10,12 +10,17 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.stock.entity.Company;
+import com.stock.entity.Exchange;
 import com.stock.entity.StockPrice;
 import com.stock.service.ImportService;
 import com.stock.service.StockPriceService;
@@ -75,4 +80,11 @@ public class FileuploadController {
         }
         return "updateload success";
     }
+    
+    /*
+     * 获取stockprice数据*/
+    @GetMapping(value = "/compareData")
+	public Object findAllCompanyList(@PathVariable long companyId, @PathVariable String startDate, @PathVariable String endDate) throws Exception{
+		return stockPriceService.companyStockPrice(companyId, startDate, endDate);
+	}
 }				
