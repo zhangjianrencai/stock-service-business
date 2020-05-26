@@ -18,5 +18,5 @@ public interface IPOService {
     
     public void delete(long id);
     
-    public Object searchIPOByUser(long id);
+    public Object searchIPOByUser();
 }

@@ -67,7 +67,8 @@ public class CompanyController {
      * @return String
      */
 	@PutMapping("/{id}")
-	public ResponseEntity<String> update(@RequestBody Company company) throws Exception{
+	public ResponseEntity<String> update(@PathVariable Long id, @RequestBody Company company) throws Exception{
+		company.setId(id);
 		companyService.save(company);
 		return ResponseEntity.ok("Update is OK"); 
 	}

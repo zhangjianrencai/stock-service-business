@@ -17,5 +17,4 @@ public interface CompanyService {
     public List<Company> findAllCompanyList();
     
     public void delete(long id);
-
 }

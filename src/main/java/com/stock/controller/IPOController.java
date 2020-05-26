@@ -55,8 +55,8 @@ public class IPOController {
 		return ResponseEntity.ok("Update is OK"); 
 	}
 	
-	@GetMapping("/{id}")
-	public Object searchIPOByUser(@PathVariable long id) throws Exception{
-		return ipoService.searchIPOByUser(id);
+	@GetMapping("/byUser")
+	public Object searchIPOByUser() throws Exception{
+		return ipoService.searchIPOByUser();
 	}
 }				

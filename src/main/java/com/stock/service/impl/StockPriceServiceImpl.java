@@ -19,6 +19,11 @@ public class StockPriceServiceImpl implements StockPriceService{
     public void save(StockPrice stockPrice) {
     	stockPriceRepository.save(stockPrice);
     }
+    
+    @Override
+    public Object companyStockPrice(long companyId, String startDate, String endDate) {
+    	return stockPriceRepository.companyStockPrice(companyId, startDate, endDate);
+    }
 }
 
 
