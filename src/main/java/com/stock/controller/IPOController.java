@@ -56,7 +56,7 @@ public class IPOController {
 	}
 	
 	@GetMapping("/byUser")
-	public Object searchIPOByUser() throws Exception{
+	public List<Object> searchIPOByUser() throws Exception{
 		return ipoService.searchIPOByUser();
 	}
 }				

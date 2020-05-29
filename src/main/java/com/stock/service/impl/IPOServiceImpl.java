@@ -52,7 +52,7 @@ public class IPOServiceImpl implements IPOService{
 	}
 
 	@Override
-	public Object searchIPOByUser() {
+	public List<Object> searchIPOByUser() {
 		return ipoRepository.searchIPOListByUser();
 	}
 

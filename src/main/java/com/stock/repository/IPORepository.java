@@ -1,6 +1,7 @@
 package com.stock.repository;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -15,8 +16,8 @@ import com.stock.entity.IPO;
 @Repository
 public interface IPORepository extends JpaRepository<IPO, Long> {
     
-	@Query(value = "select c1.company_name as company_name , c1.brief as brief , c1.ceo as ceo, c1.directors as directors , c1.turnover as turnover , sptotal.current_price as current_price from company c1 inner join (select sp1.current_price, sp1.stock_code from stock_price sp1 , (select max(date_time) as time from stock_price group by stock_code) sp where sp1.date_time = sp.time) sptotal on c1.stock_code = sptotal.stock_code;", nativeQuery = true)
-	public Object searchIPOListByUser();
+	@Query(value = "select c1.id as id, c1.stock_code as stock_code ,sptotal.current_price as current_price from company c1 inner join (select sp1.current_price, sp1.stock_code from stock_price sp1 , (select max(date_time) as time from stock_price group by stock_code) sp where sp1.date_time = sp.time) sptotal on c1.stock_code = sptotal.stock_code;", nativeQuery = true)
+	public List<Object> searchIPOListByUser();
 	
 	
 	@Modifying
