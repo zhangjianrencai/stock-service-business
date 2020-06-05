@@ -16,7 +16,7 @@ import com.stock.entity.IPO;
 @Repository
 public interface IPORepository extends JpaRepository<IPO, Long> {
     
-	@Query(value = "select c1.id as id, c1.stock_code as stock_code ,sptotal.current_price as current_price from company c1 inner join (select sp1.current_price, sp1.stock_code from stock_price sp1 , (select max(date_time) as time from stock_price group by stock_code) sp where sp1.date_time = sp.time) sptotal on c1.stock_code = sptotal.stock_code;", nativeQuery = true)
+	@Query(value = "select c1.id as id, c1.stock_code as stock_code ,sptotal.current_price as current_price from company c1 inner join (select sp1.current_price, sp1.stock_code from stock_price sp1 , (select max(date_time) as time from stock_price group by stock_code) sp where sp1.date_time = sp.time group by stock_code) sptotal on c1.stock_code = sptotal.stock_code;", nativeQuery = true)
 	public List<Object> searchIPOListByUser();
 	
 	
